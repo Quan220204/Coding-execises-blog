@@ -1,0 +1,32 @@
+# https://codeforces.com/problemset/problem/875/A
+
+number = int(input())
+founded = False
+answer_list = []
+
+
+def sum_digit_and_itself(number):
+    """calculate sum of digits and the number itself"""
+    val = number
+    result = 0
+    while val > 0:
+        result += val % 10
+        val = val // 10
+    return result + number
+
+
+# the sum_digit_and_itself can only be in the interval [number, number+82]
+# because the sum of digits can not exceed 9*9 so we only need to check
+# that interval
+for i in range(number + 1, number - 82, -1):
+    if sum_digit_and_itself(i) == number:
+        answer_list.append(i)
+        founded = True
+
+if not founded:
+    print(0)
+else:
+    print(len(answer_list))
+    answer_list.sort()
+    for i in answer_list:
+        print(i)
