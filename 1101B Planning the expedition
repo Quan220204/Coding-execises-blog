@@ -1,0 +1,9 @@
+Link of the task: https://codeforces.com/problemset/problem/1011/B
+
+At first, I thought that I should make a list containing the quantities of n food with the largest quantities: food_type_largest_quantity_sequence = [quantities of n types of food].
+Then, I should work out how to divide the food to n people so that the person with the least daily food packages can "survive" maximum days. But this was too hard.
+
+Then, I read from a stranger on Codeforces that WE SHOULD TRY FOR D DAYS, MAXIMUM HOW MANY PEOPLE CAN SURVIVE. This makes things become easier. We'll for the days from m to 0.
+For example, we want to see maximum how many people can survive d days.
+Let's say, there are ci packages of food type i, the maximum number of people that can survive d days only eating type i is p = ci // d. Then we'll add up the number of people to see
+if it is >= m or not. If yes, we print d. Done.
