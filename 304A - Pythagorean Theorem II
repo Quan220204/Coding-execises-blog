@@ -1,0 +1,40 @@
+# https://codeforces.com/problemset/problem/304/A
+# The idea is to test how many sets of [a,b,c] are going to satisfy a <= b <= c <= n by:
+# 1. choose every set of (i,j) with sqrt(n) > j > i > 0 
+# 2. test that whether or not k * (i ** 2 + j ** 2) <= n with k = 1,2,3,4,...
+#    +) if k * (i ** 2 + j ** 2) <= n , we can easily create a set [a,b,c]: a=k(j^2-j^2), b=k(2ij), c=k(i^2+j^2) (***).  
+#       Read this: https://en.wikipedia.org/wiki/Pythagorean_triple#Generating_a_triple to know why is (***).
+#       Then we add that set [a,b,c] in an increasing order to a set, so that duplicate sets are removed.
+# 3. The number of items in the set is the answer.
+
+
+import math
+
+num = int(input())
+count = 0
+s = set()
+bo_be_lon_huyen = []
+num_sqrt = int(math.sqrt(num))
+
+for i in range(1, num_sqrt + 1):
+    for j in range(i + 1, num_sqrt + 1):
+        # j > i
+        k = 1
+        while k * (i ** 2 + j ** 2) <= num:
+            # generate a,b,c
+            a = k * (j ** 2 - i ** 2)
+            b = k * 2 * i * j
+            c = k * (i ** 2 + j ** 2)
+            
+            # put a,b,c into a list and sort so that a <= b <= c <= n
+            bo_be_lon_huyen = [a,b,c]
+            bo_be_lon_huyen.sort()
+            triplet = f'{bo_be_lon_huyen[0]}-{bo_be_lon_huyen[1]}' \
+                      f'-{bo_be_lon_huyen[2]}'
+                      
+            # add the triplet to a set to remove duplicate items
+            s.add(triplet)
+            k += 1
+
+
+print(len(s))
