@@ -6,9 +6,13 @@ class Solution:
         if len(nums) == 1:
             return nums[0]
 
-        # If there're two or more types of choco, we'll try to operate n times, and AFTER EACH OPERATIONS, we'll calculate the total lowest cost possible of buying all the chocolate and the cost of performing the operation(s). We should note that any type of choco can be bought at any operations before or at the k-th operation. So they can be bought with the lowest price:
+        # If there're two or more types of choco, we'll try to operate n times, and AFTER EACH OPERATIONS, 
+        #we'll calculate the total lowest cost possible of buying all the chocolate and the cost of performing the operation(s).
+        #We should note that any type of choco can be bought at any operations before or at the k-th operation. 
+        #So they can be bought with the lowest price:
         # We will consider nums is the list with nums[i] storing the lowest price to buy type[i] after kth operations.
-        # If we perform 0 operation, here's how we calculate the total_needed_to_spend. The cost_total_buy_choco is just sum(nums) because we perform 0 operations.
+        # If we perform 0 operation, here's how we calculate the total_needed_to_spend. The cost_total_buy_choco is just sum(nums),
+        # because we perform 0 operations.
         cost_total_buy_choco = sum(nums)
         cost_operations = 0
         total_needed_to_spend = cost_total_buy_choco + cost_operations
@@ -18,7 +22,9 @@ class Solution:
         for kth_operation in range(len(nums)-1):
             # After the kth_operation, the cost_operations = x * k.
             cost_operations += x
-            # Now we calculate the cost_total_buy_choco, noting that we are trying to find out how to spend the least amount of money to buy every type, and we can buy any type in any j-th operation (j<=k) so we choose to buy it when it has the lowest price. And we store those lowest prices in nums.
+            # Now we calculate the cost_total_buy_choco, noting that we are trying to find out how to spend the least amount of money,
+            #to buy every type, and we can buy any type in any j-th operation (j<=k) so we choose to buy it when it has the lowest price.
+            # And we store those lowest prices in nums.
             # Here, if nums consider the price after kth operations, then nums_copy is considering the price after (K+1)th operations.
             nums_copy = nums.copy()
             for i in range(len(nums)):
@@ -28,7 +34,8 @@ class Solution:
             nums = nums_copy # This is brilliant !!!!!!!!!!!!!!
             cost_total_buy_choco = sum(nums)
 
-            # Finally, we calculate the total_needed_to_spend and see if it cost more of less than before we perform the operation. If the total_needed_to_spend after the operation is cheaper, we save that to the answer.
+            # Finally, we calculate the total_needed_to_spend and see if it cost more of less than before we perform the operation.
+            # If the total_needed_to_spend after the operation is cheaper, we save that to the answer.
             total_needed_to_spend = cost_total_buy_choco + cost_operations
             answer = min(answer, total_needed_to_spend)
 

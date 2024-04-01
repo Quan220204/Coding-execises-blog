@@ -1,0 +1,15 @@
+https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/
+class Solution:
+    def maximumBeauty(self, A: List[int], k: int) -> int:
+        A.sort()
+        window_start = 0
+
+        # We increase the window size
+        for window_end in range(len(A)):
+            # if the "next" right side does not fit the left side, we slide it by increasing i
+            # we don't care if the new window fits or not because the biggest size ever recorded is the current size
+            if A[window_end] - A[window_start] > k * 2:
+                window_start += 1
+            # if the "next" right side fits the left side, we increase the size of the window
+
+        return window_end - window_start + 1
